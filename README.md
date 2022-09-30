@@ -48,14 +48,14 @@ ln -s weka-3-8-6 weka
 A version of `csv2arff` is provided here, but the latest version will
 always be in https://github.com/AndrewCRMartin/bioscripts/
 
-First of all, create a ~/bin directory if it doesn't exist and copy the
+First of all, create a `~/bin` directory if it doesn't exist and copy the
 script there if it doesn't exist already:
 ```
 mkdir -p ~/bin
 if [ ! -e ~/bin/csv2arff ]; then cp csv2arff/csv2arff.pl ~/bin/csv2arff; fi
 ```
 
-Now ensure that ~/bin is in your path:
+Now ensure that `~/bin` is in your path:
 ```
 if [ X`echo $PATH | grep ${HOME}/bin` != "X" ]; then echo "It's there"; else echo "You need to add ${HOME}/bin to your path"; fi
 ```
@@ -65,7 +65,11 @@ then you need to edit `~/.bashrc` and add the line:
 ```
 export PATH="$PATH:$HOME/bin"
 ```
-at the end of the file.
+at the end of the file. Once you have saved the file, at the command prompt, type:
+```
+source ~/.bashrc
+```
+
 
 
 
