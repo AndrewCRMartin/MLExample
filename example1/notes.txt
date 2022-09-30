@@ -1,0 +1,24 @@
+# Convert each JSON file to CSV
+   mkdir -p pdcsv
+   for file in PD/*.json
+   do
+       json2csv.pl $file >pdcsv/`basename $file .json`.csv
+   done
+
+# remove any CSV files with errors
+   for file in pdcsv/*
+   do
+       if grep -q ERROR $file ; then
+           rm -f $file
+       fi
+   done
+
+# Join the csv files
+   cat pdcsv/* > tmp.csv
+   head -1 tmp.csv > pd.csv
+   grep -v Binding tmp.csv >> pd.csv
+# (Binding is just one of the words that appears in the header - you
+#  could chose anything)
+
+
+
