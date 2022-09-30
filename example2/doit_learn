@@ -1,9 +1,18 @@
-export CLASSPATH="$HOME/weka-3-8-3/weka.jar"
+export CLASSPATH="$HOME/weka/weka.jar"
 
-java weka.classifiers.trees.RandomForest  -t HumVar_500_1.arff   -d HumVar_500_1_RF.model   >HumVar_500_1_RF.out
-java weka.classifiers.trees.RandomForest  -t HumVar_500_2.arff   -d HumVar_500_2_RF.model   >HumVar_500_2_RF.out
-java weka.classifiers.trees.RandomForest  -t HumVar_500_3.arff   -d HumVar_500_3_RF.model   >HumVar_500_3_RF.out
-java weka.classifiers.trees.RandomForest  -t HumVar_500_4.arff   -d HumVar_500_4_RF.model   >HumVar_500_4_RF.out
-java weka.classifiers.trees.RandomForest  -t HumVar_500_5.arff   -d HumVar_500_5_RF.model   >HumVar_500_5_RF.out
+# Step through all the .arff files
+for file in *.arff
+do
+   # Create a filename for the model
+   model=`basename $file .arff`.model
+   # Create a filename for the output
+   out=`basename $file .arff`.out
+   echo -n "Training $model..."
+   # Train the classifier, saving the trained model and the output
+   java weka.classifiers.trees.RandomForest -t $file -d $model >$out
+   echo "done"
+done
 
+# Extract the internally cross-validated results
+echo "                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class"
 cat *.out | grep -A 20 Stratified | grep Weighted

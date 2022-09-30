@@ -1,8 +1,7 @@
 CSV2ARFF=csv2arff
 DATA=humVar_withNoErrorsNoMissing_PD50pctSNP50pct.key.header.csv
+SIZE=1100
 
-$CSV2ARFF -v -norm -limit=500 inputs.txt dataset $DATA >HumVar_500_1.arff
-$CSV2ARFF -v -norm -limit=500 inputs.txt dataset $DATA >HumVar_500_2.arff
-$CSV2ARFF -v -norm -limit=500 inputs.txt dataset $DATA >HumVar_500_3.arff
-$CSV2ARFF -v -norm -limit=500 inputs.txt dataset $DATA >HumVar_500_4.arff
-$CSV2ARFF -v -norm -limit=500 inputs.txt dataset $DATA >HumVar_500_5.arff
+$CSV2ARFF -norm -limit=${SIZE} inputs.txt dataset $DATA >HumVar_${SIZE}_1.arff
+$CSV2ARFF -norm -limit=${SIZE} inputs.txt dataset $DATA >HumVar_${SIZE}_2.arff
+$CSV2ARFF -norm -limit=${SIZE} inputs.txt dataset $DATA >HumVar_${SIZE}_3.arff
